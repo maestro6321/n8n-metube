@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   n8n_service:
     build: .
@@ -9,13 +7,15 @@ services:
     ports:
       - "8443:8443"
     volumes:
-      # Mounts a local directory for n8n's persistent data.
-      - ./n8n-data:/home/node/.n8n
+      # Use a Docker-managed volume for n8n's persistent data to avoid host permission issues.
+      - n8n_data:/home/node/.n8n
       # Mounts a shared directory for MeTube downloads.
       - ./metube-downloads:/mnt/metube_downloads
       # CRITICAL: Mounts your SSL certificates (read-only).
       # The 'cert' directory MUST contain 'fullchain.pem' and 'privkey.pem'.
       - ./cert:/mnt/cert:ro
+    # Ensures the container runs as the 'node' user, fixing volume permission issues.
+    user: node
     environment:
       # Variables loaded from the .env file
       N8N_HOST: ${N8N_HOST}
@@ -44,8 +44,6 @@ services:
       - ./youtube-cookies.txt:/config/youtube-cookies.txt:ro
     environment:
       # Variables loaded from the .env file
-      UID: ${METUBE_UID}
-      GID: ${METUBE_GID}
       TZ: ${TZ}
       # Static variables for this service configuration
       DOWNLOAD_DIR: /downloads
@@ -57,3 +55,6 @@ services:
 networks:
   app_network:
     driver: bridge
+
+volumes:
+  n8n_data:
