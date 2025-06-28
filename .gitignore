@@ -1,26 +1,11 @@
-# Ignore all files in certs, codes, and n8n-data, but keep the folders
-/certs/*
-!/certs/.gitkeep
+# Ignore the environment file containing secrets and local configuration
+.env
 
-/codes/*
+# Ignore local data, downloads, and sensitive files
+n8n-data/
+metube-downloads/
+cert/
+!/cert/.gitkeep
+codes/
 !/codes/.gitkeep
-
-/n8n-data/*
-!/n8n-data/.gitkeep
-
-# Python
-__pycache__/
-*.pyc
-
-# VSCode
-.vscode/
-
-# Logs
-*.log
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Docker
-*.env
+youtube-cookies.txt
