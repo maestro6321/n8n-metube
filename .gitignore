@@ -4,8 +4,4 @@
 # Ignore local data, downloads, and sensitive files
 n8n-data/
 metube-downloads/
-cert/
-!/cert/.gitkeep
-codes/
-!/codes/.gitkeep
 youtube-cookies.txt
