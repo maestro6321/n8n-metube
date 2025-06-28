@@ -20,7 +20,7 @@ This repository provides a `docker-compose` setup for running a self-hosted inst
 
 1.  **Clone the Repository**
     ```sh
-    git clone <your-repo-url>
+    git clone <https://github.com/maestro6321/n8n-metube>
     cd n8n-metube
     ```
 
